@@ -1,6 +1,6 @@
-import 'package:blog_app/app/landing/landing_view.dart';
 import 'package:blog_app/app/login/login_controller.dart';
 import 'package:blog_app/app/register/register_view.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,11 +25,14 @@ class LoginView extends StatelessWidget {
               ),
               Container(
                 margin: const EdgeInsets.only(top: 20, bottom: 20),
-                child: const TextField(
+                child: TextField(
                   keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    labelText: "Username / Email",
+                  decoration: const InputDecoration(
+                    labelText: "Email",
                   ),
+                  onChanged: (value) {
+                    controller.email.value = value;
+                  },
                 ),
               ),
               Obx(
@@ -37,6 +40,9 @@ class LoginView extends StatelessWidget {
                   return Container(
                     margin: const EdgeInsets.only(bottom: 20),
                     child: TextField(
+                      onChanged: (value) {
+                        controller.password.value = value;
+                      },
                       obscureText: !controller.isObsecure.value,
                       decoration: const InputDecoration(
                         labelText: "Password",
@@ -65,7 +71,7 @@ class LoginView extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.off(() => const LandingView());
+                  controller.login();
                 },
                 child: Container(
                   width: 200,

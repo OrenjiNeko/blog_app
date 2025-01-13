@@ -9,7 +9,6 @@ import '../../dto/dto_register_params.dart';
 import '../../service/register_service.dart';
 
 class RegisterController extends GetxController {
-  RegisterModel? regiterModel;
   var isReveal = false.obs;
   var isEmailValid = true.obs;
   var userName = "".obs;
@@ -28,11 +27,7 @@ class RegisterController extends GetxController {
       password: password.value,
     );
     var response = await RegisterService().register(params);
-    regiterModel = RegisterModel(
-      error: response.error,
-      message: response.message,
-    );
-    log("response : $regiterModel");
+
     if (response.error != null) {
       getSnackbarError(response.message!);
       return;
